@@ -1,0 +1,31 @@
+def preparar_datos(info):
+    acumulador=" "
+    for letra in info:
+       acumulador +=letra + "-"
+    return acumulador[:-1]
+#primero que nada el codigo no funcionaba por que no estaban separadas las funciones(creo que la primera funcion es la de preparar datos que tiene como parametros el info)
+#el primer para estaba bien o al mebnos yo no modifique nada mas que poner un espacio entre las comillas para separar las palabras y se vea un trabajo mas limpio
+
+def mezcla_datos(a,b):
+    if a>b:
+        return a+b
+    elif a==b:
+        return a*2
+    else:   
+        return b+a
+#en esta funcion compara los parametros a y b, para ordenarlos por mayor numero de letras, es decir si la primera palabra tiene mas letras se pone primero y si no se hace viceversa
+#aqui tampoco cambie nada
+
+def iniciar():
+    entrada1=input("Ingresa un valor de referencia textual: ")
+    entrada2=input("Ingresa otra unidad: ")
+    a=preparar_datos(entrada1)
+    b=preparar_datos(entrada2)
+    resultado=mezcla_datos(a,b)
+    print("Resultado no final: ",resultado)
+    if entrada1 in entrada2:
+      print("Coinciencia detectada.")
+iniciar()
+#en esta funcion no tiene parametros, aqui concatenamos las funciones "preparar datos" y "mezclar datos" para que salgan las frases ya unidas en cadenas
+#aqui cambie mis variables por que con las variables anteriores "x, y" si funcionaba pero pues para que tenga mas coherencia y sea un trabajo mas limpio las cambie por las variables que ocupe en la funcion mezclar datos
+#tamnien movi un poco en print del ultimo if ya que no corria 
