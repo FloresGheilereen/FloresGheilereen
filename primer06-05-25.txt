@@ -1,8 +1,10 @@
 import tkinter as tk
+
 def saludar():
    nombre = entrada.get()
    edad = entrada_edad.get()
-etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.",fg="#800040")
+
+etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.", fg="#800040")
 
 ventana = tk.Tk()
 ventana.title("Mi primera app grafica")
@@ -14,7 +16,7 @@ etiqueta1.pack()
 entrada_nombre = tk.Entry(ventana, fg="#800040")
 entrada_nombre.pack()
 
-etiqueta2 = tk.Label(ventana, text="Ingresa tu edad:", bg="pink",fg="800040")
+etiqueta2 = tk.Label(ventana, text="Ingresa tu edad:", bg="pink",fg="#800040")
 etiqueta2.pack()
 entrada_edad = tk.Entry(ventana,fg="#800040")
 entrada_edad.pack()
