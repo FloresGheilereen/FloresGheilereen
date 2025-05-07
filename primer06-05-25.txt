@@ -4,7 +4,7 @@ def saludar():
    nombre = entrada.get()
    edad = entrada_edad.get()
 
-etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.", fg="#800040")
+   etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.", fg="#800040")
 
 ventana = tk.Tk()
 ventana.title("Mi primera app grafica")
