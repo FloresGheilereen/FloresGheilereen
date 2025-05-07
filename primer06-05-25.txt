@@ -2,26 +2,30 @@ import tkinter as tk
 def saludar():
    nombre = entrada.get()
    edad = entrada_edad.get()
-etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.")
+etiqueta_resultado.config(text=f"Hola {nombre}, tienes {edad} años.",fg="#800040")
 
 ventana = tk.Tk()
-ventana.title("Saludo")
-ventana.geometry("300x150")
+ventana.title("Mi primera app grafica")
+ventana.geometry("400x200")
+ventana.configure(bg="pink")
 
-etiqueta1 = tk.Label(ventana, text="Ingresa tu nombre:")
+etiqueta1 = tk.Label(ventana, text="Ingresa tu nombre:",bg="pink", fg="#800040")
 etiqueta1.pack()
-entrada_nombre = tk.Entry(ventana)
+entrada_nombre = tk.Entry(ventana, fg="#800040")
 entrada_nombre.pack()
 
-etiqueta2 = tk.Label(ventana, text="Ingresa tu edad:")
+etiqueta2 = tk.Label(ventana, text="Ingresa tu edad:", bg="pink",fg="800040")
 etiqueta2.pack()
-entrada_edad = tk.Entry(ventana)
+entrada_edad = tk.Entry(ventana,fg="#800040")
 entrada_edad.pack()
 
-boton = tk.Button(ventana, text="Saludar", command=saludar)
+boton = tk.Button(ventana, text="Mostrar Saludo", command=saludar, fg="#800040")
 boton.pack()
 
-etiqueta_resultado = tk.Label(ventana, text="")
+etiqueta_resultado = tk.Label(ventana, text="",bg="pink", fg="#800040")
 etiqueta_resultado.pack()
+
+etiqueta = tk.Label (ventana, text="La autora de este programa fue: Flores Gutierrez Gheilereen Maeder")
+etiqueta.pack()
 
 ventana.mainloop()
