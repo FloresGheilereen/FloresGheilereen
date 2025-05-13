@@ -8,8 +8,13 @@ if resultado>100:
 etiqueta_resultado = tk.Label(text=f"Resultado: {resultado}, el area es grande", bg="#FFC0CB")
 etiqueta_resultado.pack()
 else:
-etiqueta_resultado = tk.Label(text=f"Area: {resultado}, el area es pequeña", bg="#FFC0CB")
+etiqueta_resultado = tk.Label(text=f"Area: {resultado}, el area es pequeÃ±a", bg="#FFC0CB")
 etiqueta_resultado.pack()
+
+def repetir():
+entrada_b.delete(0, tk.END)
+entrada_h.delete(0, tk.END)
+etiqueta_resultado.config(text="")
 
 def cerrar():
 ventana.destroy()
@@ -31,6 +36,9 @@ entrada_h = tk.Entry(ventana)
 entrada_h.pack()
 
 boton = tk.Button(ventana, text="Calcular area", command=resultado_op)
+boton.pack()
+
+boton = tk.Button(ventana, text="Repetir", command=repetir)
 boton.pack()
 
 boton = tk.Button(ventana, text="Salir", command=cerrar)
