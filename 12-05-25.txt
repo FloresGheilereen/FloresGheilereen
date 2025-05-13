@@ -1,24 +1,22 @@
 import tkinter as tk
 
 def resultado_op():
-base = float (entrada_b.get())
-altura = float (entrada_h.get())
-resultado = (base*altura)/2
-if resultado>100:
-etiqueta_resultado = tk.Label(text=f"Resultado: {resultado}, el area es grande", bg="#FFC0CB")
-etiqueta_resultado.pack()
-else:
-etiqueta_resultado = tk.Label(text=f"Area: {resultado}, el area es pequeña", bg="#FFC0CB")
-etiqueta_resultado.pack()
-
-def repetir():
-entrada_b.delete(0, tk.END)
-entrada_h.delete(0, tk.END)
-etiqueta_resultado.config(text="")
+    base = float (entrada_b.get())
+    altura = float (entrada_h.get())
+    resultado = (base*altura)/2
+    if resultado>100:
+       etiqueta_resultado = tk.Label(text=f"Resultado: {resultado}, el area es grande", bg="#FFC0CB")
+       etiqueta_resultado.pack()
+    else:
+       etiqueta_resultado = tk.Label(text=f"Area: {resultado}, el area es pequeña", bg="#FFC0CB")
+       etiqueta_resultado.pack()
 
 def cerrar():
-ventana.destroy()
+  ventana.destroy()
 
+def repetir():
+    entrada_b.delete(0, tk.END)
+    entrada_h.delete(0, tk.END)
 
 ventana = tk.Tk()
 ventana.title("Area del Triangulo")
@@ -38,10 +36,10 @@ entrada_h.pack()
 boton = tk.Button(ventana, text="Calcular area", command=resultado_op)
 boton.pack()
 
-boton = tk.Button(ventana, text="Repetir", command=repetir)
+boton = tk.Button(ventana, text="Salir", command=cerrar)
 boton.pack()
 
-boton = tk.Button(ventana, text="Salir", command=cerrar)
+boton = tk.Button(ventana, text="Deseas repetir?", command=repetir)
 boton.pack()
 
 ventana.mainloop()
