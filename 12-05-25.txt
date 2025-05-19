@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 
+alumnos_registrados = []
+
 def saludo_bienvenida():
     estetica_menu()
     tk.Label(area_dinamica, text="Hola, es un gusto tenerte aqui", font=("Arial", 14)).pack(pady=10)
@@ -25,11 +27,21 @@ def opciones_alumnos():
     combo.pack()
     combo.current(0)
 
+    lista_alumnos = tk.Listbox(area_dinamica, width=50)
+    lista_alumnos.pack(pady=10)
+
     def guardar_opciones():
         valor = campo_texto_uno.get()
-        messagebox.showinfo("Revisión", f"Alumno: {valor}\nGenero: {opcion_elegida.get()}\nSemestre: {combo.get()}")
+        genero = opcion_elegida.get()
+        semestre = combo.get()
+        datos = f"{valor} - {genero} - {semestre}"
+        alumnos_registrados.append(datos)
+        lista_alumnos.delete(0, tk.END)
+        for alumno in alumnos_registrados:
+            lista_alumnos.insert(tk.END, alumno)
+            messagebox.showinfo("Revisión", f"Alumno: {valor}\nGenero: {genero}\nSemestre: {semestre}")
 
-    tk.Button(area_dinamica, text="Mostar datos", command=guardar_opciones).pack(pady=10)
+    tk.Button(area_dinamica, text="Mostar alumnos", command=guardar_opciones).pack(pady=10)
 
 def estetica_tres():
     estetica_menu()
@@ -38,10 +50,10 @@ def estetica_tres():
     colores = ["lightblue", "lightgreen", "lightyellow", "lightgray"]
     tk.Label(area_dinamica, text="Cambiar fondo:").pack()
 
-    def cambiar_color(c):
-        ventana_principal.config(bg=c)
-        menu_lateral.config(bg=c)
-        area_dinamica.config(bg=c)
+def cambiar_color(c):
+    ventana_principal.config(bg=c)
+    menu_lateral.config(bg=c)
+    area_dinamica.config(bg=c)
 
     for c in colores:
         tk.Button(area_dinamica, text=c, bg=c, width=20, command=lambda col=c: cambiar_color(col)).pack(pady=2)
@@ -50,12 +62,12 @@ def ayuda_alumno():
     estetica_menu()
     tk.Label(area_dinamica, text="Texto de ayuda que el alumno debe mejorar", font=("Arial", 14)).pack(pady=10)
     contenido = (
-        "Explica con tus palabras:\n\n"
-        "- ¿Qué hace cada botón?\n"
-        "- ¿Qué cambias si modificas un texto?\n"
-        "- ¿Cómo cambias un color?\n"
-        "- ¿Qué debes renombrar?"
-    )
+    "Explica con tus palabras:\n\n"
+    "- ¿Qué hace cada botón?\n"
+    "- ¿Qué cambias si modificas un texto?\n"
+    "- ¿Cómo cambias un color?\n"
+    "- ¿Qué debes renombrar?"
+)
     tk.Label(area_dinamica, text=contenido, justify="left").pack(pady=10)
 
 def estetica_menu():
@@ -81,3 +93,4 @@ tk.Button(menu_lateral, text="Salir", command=ventana_principal.destroy, width=1
 
 saludo_bienvenida()
 ventana_principal.mainloop()
+
