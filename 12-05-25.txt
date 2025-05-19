@@ -1,45 +1,83 @@
 import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
 
-def resultado_op():
-    base = float (entrada_b.get())
-    altura = float (entrada_h.get())
-    resultado = (base*altura)/2
-    if resultado>100:
-       etiqueta_resultado = tk.Label(text=f"Resultado: {resultado}, el area es grande", bg="#FFC0CB")
-       etiqueta_resultado.pack()
-    else:
-       etiqueta_resultado = tk.Label(text=f"Area: {resultado}, el area es pequeña", bg="#FFC0CB")
-       etiqueta_resultado.pack()
+def saludo_bienvenida():
+    estetica_menu()
+    tk.Label(area_dinamica, text="Hola, es un gusto tenerte aqui", font=("Arial", 14)).pack(pady=10)
+    tk.Button(area_dinamica, text="Mostrar mensaje de bienvenida", command=lambda: messagebox.showinfo("Bienvenida", "Hola, bienvenido al programa")).pack()
 
-def cerrar():
-  ventana.destroy()
+def opciones_alumnos():
+    estetica_menu()
+    tk.Label(area_dinamica, text="Datos del alumno", font=("Arial", 14)).pack(pady=10)
 
-def repetir():
-    entrada_b.delete(0, tk.END)
-    entrada_h.delete(0, tk.END)
+    tk.Label(area_dinamica, text="Nombre del alumno:").pack()
+    campo_texto_uno = tk.Entry(area_dinamica)
+    campo_texto_uno.pack(pady=5)
 
-ventana = tk.Tk()
-ventana.title("Area del Triangulo")
-ventana.geometry("400x200")
-ventana.config(bg="#FFC0CB")
+    tk.Label(area_dinamica, text="Elige una opcion:").pack()
+    opcion_elegida = tk.StringVar(value="Masculino")
+    tk.Radiobutton(area_dinamica, text="Masculino", variable=opcion_elegida, value="Masculino").pack()
+    tk.Radiobutton(area_dinamica, text="Femenino", variable=opcion_elegida, value="Femenino").pack()
 
-etiqueta_b = tk.Label(ventana, text="Ingresa la base:", bg="#FFC0CB")
-etiqueta_b.pack()
-entrada_b = tk.Entry(ventana)
-entrada_b.pack()
+    tk.Label(area_dinamica, text="Semestre:").pack()
+    combo = ttk.Combobox(area_dinamica, values=["Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" ])
+    combo.pack()
+    combo.current(0)
 
-etiqueta_h = tk.Label(ventana, text="Ingresa la altura:", bg="#FFC0CB")
-etiqueta_h.pack()
-entrada_h = tk.Entry(ventana)
-entrada_h.pack()
+    def guardar_opciones():
+        valor = campo_texto_uno.get()
+        messagebox.showinfo("Revisión", f"Alumno: {valor}\nGenero: {opcion_elegida.get()}\nSemestre: {combo.get()}")
 
-boton = tk.Button(ventana, text="Calcular area", command=resultado_op)
-boton.pack()
+    tk.Button(area_dinamica, text="Mostar datos", command=guardar_opciones).pack(pady=10)
 
-boton = tk.Button(ventana, text="Salir", command=cerrar)
-boton.pack()
+def estetica_tres():
+    estetica_menu()
+    tk.Label(area_dinamica, text="Configuraciones de estetica", font=("Arial", 14)).pack(pady=10)
 
-boton = tk.Button(ventana, text="Deseas repetir?", command=repetir)
-boton.pack()
+    colores = ["lightblue", "lightgreen", "lightyellow", "lightgray"]
+    tk.Label(area_dinamica, text="Cambiar fondo:").pack()
 
-ventana.mainloop()
+    def cambiar_color(c):
+        ventana_principal.config(bg=c)
+        menu_lateral.config(bg=c)
+        area_dinamica.config(bg=c)
+
+    for c in colores:
+        tk.Button(area_dinamica, text=c, bg=c, width=20, command=lambda col=c: cambiar_color(col)).pack(pady=2)
+
+def ayuda_alumno():
+    estetica_menu()
+    tk.Label(area_dinamica, text="Texto de ayuda que el alumno debe mejorar", font=("Arial", 14)).pack(pady=10)
+    contenido = (
+        "Explica con tus palabras:\n\n"
+        "- ¿Qué hace cada botón?\n"
+        "- ¿Qué cambias si modificas un texto?\n"
+        "- ¿Cómo cambias un color?\n"
+        "- ¿Qué debes renombrar?"
+    )
+    tk.Label(area_dinamica, text=contenido, justify="left").pack(pady=10)
+
+def estetica_menu():
+    for widget in area_dinamica.winfo_children():
+        widget.destroy()
+
+ventana_principal = tk.Tk()
+ventana_principal.title("Interfaz para prácticas")
+ventana_principal.geometry("500x400")
+ventana_principal.config(bg="lightblue")
+
+menu_lateral = tk.Frame(ventana_principal, bg="lightblue", width=120)
+menu_lateral.pack(side="left", fill="y")
+
+area_dinamica = tk.Frame(ventana_principal, bg="white")
+area_dinamica.pack(side="right", expand=True, fill="both")
+
+tk.Button(menu_lateral, text="Inicio", command=saludo_bienvenida, width=15).pack(pady=10)
+tk.Button(menu_lateral, text="Datos del alumno", command=opciones_alumnos, width=15).pack(pady=10)
+tk.Button(menu_lateral, text="Estetica", command=estetica_tres, width=15).pack(pady=10)
+tk.Button(menu_lateral, text="Ayuda", command=ayuda_alumno, width=15).pack(pady=10)
+tk.Button(menu_lateral, text="Salir", command=ventana_principal.destroy, width=15).pack(pady=30)
+
+saludo_bienvenida()
+ventana_principal.mainloop()
